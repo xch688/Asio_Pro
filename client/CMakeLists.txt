@@ -41,13 +41,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}   \
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/sylar SYLAR_SRCS)
-
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/example/day1 SRC_DAY1)
-add_executable(client1 ${SRC_DAY1} ${SYLAR_SRCS})
-force_redefine_file_macro_for_sources(client1)
-
 include_directories(${PROJECT_PATH}/boost/include)
 
 set(LIBS pthread
@@ -58,7 +51,17 @@ set(LIBS pthread
 
 file(GLOB BOOST_LIBS "${PROJECT_PATH}/boost/lib/lib*.so")
 
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/sylar SYLAR_SRCS)
+
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/example/day1 SRC_DAY1)
+add_executable(client1 ${SRC_DAY1} ${SYLAR_SRCS})
+force_redefine_file_macro_for_sources(client1)
 target_link_libraries(client1 PRIVATE ${BOOST_LIBS} ${LIBS})
+
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/example/day4 SRC_DAY4)
+add_executable(client4 ${SRC_DAY4} ${SYLAR_SRCS})
+force_redefine_file_macro_for_sources(client4)
+target_link_libraries(client4 PRIVATE ${BOOST_LIBS} ${LIBS})
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)

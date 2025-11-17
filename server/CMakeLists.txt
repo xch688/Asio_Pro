@@ -68,5 +68,12 @@ add_executable(server3 ${SRC_DAY3} ${SYLAR_SRCS})
 force_redefine_file_macro_for_sources(server3)
 target_link_libraries(server3 PRIVATE ${BOOST_LIBS} ${LIBS})
 
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/example/day4 SRC_DAY4)
+add_executable(server4 ${SRC_DAY4} ${SYLAR_SRCS}
+        example/day4/Server.cpp
+        example/day4/Server.h)
+force_redefine_file_macro_for_sources(server4)
+target_link_libraries(server4 PRIVATE ${BOOST_LIBS} ${LIBS})
+
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
